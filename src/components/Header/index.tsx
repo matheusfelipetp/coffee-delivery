@@ -2,8 +2,12 @@ import { MapPin, ShoppingCart } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo.svg';
 import { HeaderContainer, HeaderStyled } from './style';
+import { CoffeesContext } from '../../context/CoffeesContext';
+import { useContext } from 'react';
 
 export default function Header() {
+  const { cart } = useContext(CoffeesContext);
+
   return (
     <HeaderStyled>
       <HeaderContainer>
@@ -20,7 +24,7 @@ export default function Header() {
             Rio de Janeiro, RJ
           </div>
           <Link to="/cart" className="btn-cart">
-            <span>0</span>
+            <span>{cart.length}</span>
             <ShoppingCart size={20} />
           </Link>
         </nav>
