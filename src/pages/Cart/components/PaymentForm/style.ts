@@ -1,7 +1,7 @@
 import { DefaultTheme, styled } from 'styled-components';
 
 interface PaymentCardProps {
-  isSelect: boolean;
+  selected: boolean;
   theme: DefaultTheme;
 }
 
@@ -26,6 +26,7 @@ export const HeaderForm = styled.div`
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
+    font-weight: 600;
     font-family: 'Roboto', sans-serif;
     color: ${(props) => props.theme['gray-800']};
 
@@ -62,11 +63,11 @@ export const PaymentCard = styled.div<PaymentCardProps>`
   font-size: 0.75rem;
   color: ${(props) => props.theme['gray-700']};
   border: ${(props) =>
-    props.isSelect
+    props.selected
       ? `1px solid ${props.theme['purple-200']}`
       : `1px solid ${props.theme['gray-400']}`};
   background: ${(props) =>
-    props.isSelect ? props.theme['purple-100'] : props.theme['gray-400']};
+    props.selected ? props.theme['purple-100'] : props.theme['gray-400']};
   cursor: pointer;
 
   &:hover {

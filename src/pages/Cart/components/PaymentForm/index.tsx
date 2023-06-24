@@ -36,7 +36,7 @@ export default function PaymentForm() {
         />
 
         <label htmlFor="option-credit">
-          <PaymentCard isSelect={optionSelected === 'Cartão de crédito'}>
+          <PaymentCard selected={optionSelected === 'Cartão de crédito'}>
             <Cardholder size={20} />
             Cartão de crédito
           </PaymentCard>
@@ -51,7 +51,7 @@ export default function PaymentForm() {
           onChange={handleOption}
         />
         <label htmlFor="option-debit">
-          <PaymentCard isSelect={optionSelected === 'Cartão de débito'}>
+          <PaymentCard selected={optionSelected === 'Cartão de débito'}>
             <Bank size={20} />
             Cartão de débito
           </PaymentCard>
@@ -66,7 +66,7 @@ export default function PaymentForm() {
           onChange={handleOption}
         />
         <label htmlFor="option-money">
-          <PaymentCard isSelect={optionSelected === 'Dinheiro'}>
+          <PaymentCard selected={optionSelected === 'Dinheiro'}>
             <Money size={20} />
             Dinheiro
           </PaymentCard>

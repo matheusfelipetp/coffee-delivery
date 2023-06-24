@@ -35,6 +35,7 @@ export const HeaderForm = styled.div`
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
+    font-weight: 600;
     font-family: 'Roboto', sans-serif;
     color: ${(props) => props.theme['gray-800']};
 
