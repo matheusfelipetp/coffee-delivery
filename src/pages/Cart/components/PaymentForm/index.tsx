@@ -5,15 +5,17 @@ import {
   PaymentContainer,
   PaymentContent,
 } from './style';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
-export default function PaymentForm() {
-  const [optionSelected, setOptionSelected] = useState('');
+interface IPaymentForm {
+  optionSelected: string;
+  handleOption: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
-  const handleOption = (event: ChangeEvent<HTMLInputElement>) => {
-    setOptionSelected(event.target.value);
-  };
-
+export default function PaymentForm({
+  optionSelected,
+  handleOption,
+}: IPaymentForm) {
   return (
     <PaymentContainer>
       <HeaderForm>

@@ -1,4 +1,6 @@
 import { Minus, Plus, Trash } from '@phosphor-icons/react';
+import { useContext } from 'react';
+import { CoffeesContext } from '../../../../context/CoffeesContext';
 import { ICoffee } from '../../../Home/components/CoffeeCard';
 import { ButtonContainer, ItemCartContainer, ItemCartInfo } from './style';
 
@@ -7,6 +9,9 @@ interface IItemCart {
 }
 
 export default function ItemCart({ coffee }: IItemCart) {
+  const { addQuantityInCart, removeQuantityInCart, clearCoffeeInCart } =
+    useContext(CoffeesContext);
+
   return (
     <ItemCartContainer>
       <img src={coffee.image} alt={coffee.name} />
@@ -16,16 +21,19 @@ export default function ItemCart({ coffee }: IItemCart) {
 
         <ButtonContainer>
           <div className="quantity">
-            <button>
+            <button onClick={() => removeQuantityInCart(coffee.id)}>
               <Minus size={20} />
             </button>
             <span>{coffee.quantity}</span>
-            <button>
+            <button onClick={() => addQuantityInCart(coffee.id)}>
               <Plus size={20} />
             </button>
           </div>
 
-          <button className="remove">
+          <button
+            className="remove"
+            onClick={() => clearCoffeeInCart(coffee.id)}
+          >
             <Trash size={20} />
             Remover
           </button>

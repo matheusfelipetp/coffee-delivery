@@ -1,21 +1,42 @@
-import { useContext } from 'react';
-import { CartContent, TotalCartContainer, TotalInfoContainer } from './style';
-import { CoffeesContext } from '../../../../context/CoffeesContext';
 import { Coffee } from '@phosphor-icons/react';
+import { useContext } from 'react';
+import { IFields } from '../..';
+import { CoffeesContext } from '../../../../context/CoffeesContext';
 import ItemCart from '../ItemCart';
+import { CartContent, TotalCartContainer, TotalInfoContainer } from './style';
 
-export default function TotalCart() {
-  const { cart } = useContext(CoffeesContext);
+export interface ITotalCart {
+  fields: IFields | null;
+  optionSelected: string;
+}
 
-  console.log(cart);
+export default function TotalCart({ fields, optionSelected }: ITotalCart) {
+  const { cart, confirmOrder } = useContext(CoffeesContext);
 
-  const total = () => {
+  const sendValue = 3.5;
+  const sendValueFormatted = sendValue.toFixed(2).replace('.', ',');
+
+  const totalCoffee = () => {
     const totalPrice = cart.reduce((total, coffee) => {
       const coffeePrice = parseFloat(coffee.price.replace(',', '.'));
-      return total + coffeePrice;
+      return total + coffeePrice * coffee.quantity;
     }, 0);
 
     return totalPrice.toFixed(2).replace('.', ',');
+  };
+
+  const totalCart = () => {
+    const totalValue = totalCoffee();
+    const formattedTotalValue = Number(totalValue.replace(',', '.'));
+    const sumTotal = formattedTotalValue + sendValue;
+
+    return sumTotal.toFixed(2).replace('.', ',');
+  };
+
+  const confirmeAndValidateOrder = () => {
+    if (fields) {
+      confirmOrder(fields, optionSelected);
+    }
   };
 
   return (
@@ -31,20 +52,22 @@ export default function TotalCart() {
             <TotalInfoContainer>
               <div>
                 <p>Total de itens</p>
-                <span>R$ {total()}</span>
+                <span>R$ {totalCoffee()}</span>
               </div>
 
               <div>
                 <p>Entrega</p>
-                <span>R$ 3,50</span>
+                <span>R$ {sendValueFormatted}</span>
               </div>
 
               <div className="total">
                 <p>Total</p>
-                <span>R$ 33,20</span>
+                <span>R$ {totalCart()}</span>
               </div>
 
-              <button>Confirmar pedido</button>
+              <button onClick={confirmeAndValidateOrder}>
+                Confirmar pedido
+              </button>
             </TotalInfoContainer>
           </div>
         ) : (
