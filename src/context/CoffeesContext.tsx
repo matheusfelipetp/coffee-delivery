@@ -182,6 +182,8 @@ export const CoffeesProvider = ({ children }: ICoffeesProvider) => {
 
       setOrder(newOrder);
       setCart([]);
+      setCoffeeList([]);
+
       localStorage.removeItem('@coffee-delivery-cart-1.0.0');
       navigate('/order-confirmed');
     }
